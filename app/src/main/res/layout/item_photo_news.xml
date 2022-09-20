@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/textView"
@@ -29,24 +29,59 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/photoIV"
             android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:scaleType="fitCenter"
-            android:padding="8dp"
+            android:layout_height="280dp"
+            android:padding="28dp"
+            android:scaleType="centerInside"
             android:src="@drawable/cnbc_logo" />
 
         <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
+            android:id="@+id/phototextTV"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="I am TextView"
-            android:background="@color/cardview_dark_background"
+            android:background="#80808080"
+            android:layout_margin="4dp"
             android:layout_gravity="bottom"
             android:textColor="@color/white"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+        <LinearLayout
+            android:id="@+id/photo_video_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="10dp"
+            android:visibility="visible"
+            android:layout_marginBottom="50dp"
+            android:background="#FFF8F8F6">
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@android:color/darker_gray"
+                app:srcCompat="@drawable/video_icon_24"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
+                android:layout_margin="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="VIDEO" />
+        </LinearLayout>
     </FrameLayout>
 
 
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/photoRV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:padding="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
