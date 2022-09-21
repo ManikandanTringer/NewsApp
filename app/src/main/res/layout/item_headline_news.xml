@@ -9,8 +9,8 @@
         android:id="@+id/headlineRV"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:padding="4dp"
+        android:layout_margin="1dp"
+        android:padding="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
@@ -19,11 +19,11 @@
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="HEADLINE CENTRIC NEWS  >"
         android:textColor="#2196F3"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,38 +52,23 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="#80808080"
-            android:layout_margin="4dp"
-            android:padding="4dp"
+            android:layout_marginStart="2dp"
             android:text="I am TextView"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/white" />
 
-        <LinearLayout
-            android:id="@+id/headline_video_indicator"
-            android:layout_width="wrap_content"
+
+        <ImageButton
+            android:id="@+id/headImgBtn"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="50dp"
-            android:visibility="visible"
-            android:background="#80808080">
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="80dp"
+            android:background="#80808080"
+            app:srcCompat="@drawable/play_arrow_white" />
 
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="#80808080"
-                app:srcCompat="@drawable/video_icon_24"
-                tools:ignore="TouchTargetSizeCheck" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="VIDEO" />
-
-        </LinearLayout>
     </FrameLayout>
 
 

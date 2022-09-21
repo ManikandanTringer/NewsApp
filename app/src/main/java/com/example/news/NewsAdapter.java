@@ -4,11 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -17,8 +20,9 @@ public class NewsAdapter extends RecyclerView.Adapter {
     private ArrayList<NewsModel> dataSet;
     Context nContext;
     int total_types;
+    ArrayList<HeadlineModelData> headList;
 
-    public NewsAdapter(ArrayList<NewsModel> list, MainActivity mainActivity) {
+    public NewsAdapter(ArrayList<NewsModel> list, Context mainActivity) {
         nContext=mainActivity;
         dataSet=list;
         total_types=dataSet.size();
@@ -53,8 +57,19 @@ public class NewsAdapter extends RecyclerView.Adapter {
                 case NewsModel.TYPE_HEADLINE_CENTRIC:
                     ((HeadlineCentricViewHolder) holder).headtextTV.setText(newsModel.getText());
                     ((HeadlineCentricViewHolder)holder).healineIV.setImageResource(newsModel.getImgId());
+                    LinearLayoutManager layoutManager
+                            = new LinearLayoutManager(
+                            nContext,
+                            LinearLayoutManager.VERTICAL,
+                            false);
+                    ((HeadlineCentricViewHolder) holder).headlineRV.setLayoutManager(new LinearLayoutManager(nContext));
+                        HeadlineAdapter headlineAdapter=new HeadlineAdapter(getHeadline());
+                        ((HeadlineCentricViewHolder) holder).headlineRV.setAdapter(headlineAdapter);
+                        headlineAdapter.notifyDataSetChanged();
+
                     if(newsModel.isVideo()){
                         ((HeadlineCentricViewHolder)holder).headline_video_indicator.setVisibility(View.VISIBLE);
+
                     }else{
                         ((HeadlineCentricViewHolder)holder).headline_video_indicator.setVisibility(View.INVISIBLE);
 
@@ -64,6 +79,11 @@ public class NewsAdapter extends RecyclerView.Adapter {
                 case NewsModel.TYPE_PHOTO_CENTRIC:
                     ((PhotoCentricViewHolder) holder).phototextTV.setText(newsModel.getText());
                     ((PhotoCentricViewHolder) holder).photoIV.setImageResource(newsModel.getImgId());
+
+                    ((PhotoCentricViewHolder) holder).photoRV.setLayoutManager(new GridLayoutManager(nContext,2));
+                    PhotoAdapter photoAdapter=new PhotoAdapter(getPhoto());
+                    ((PhotoCentricViewHolder) holder).photoRV.setAdapter(photoAdapter);
+                    photoAdapter.notifyDataSetChanged();
                     if(newsModel.isVideo()){
                         ((PhotoCentricViewHolder)holder).photo_video_indicator.setVisibility(View.VISIBLE);
                     }else{
@@ -76,8 +96,13 @@ public class NewsAdapter extends RecyclerView.Adapter {
 
                     ((ListCentricViewHolder) holder).listTV.setText(newsModel.getText());
                     ((ListCentricViewHolder) holder).listimg.setImageResource(newsModel.getImgId());
+                    ((ListCentricViewHolder) holder).listRV.setLayoutManager(new LinearLayoutManager(nContext));
+                    ListAdapter listAdapter=new ListAdapter(getList());
+                    ((ListCentricViewHolder) holder).listRV.setAdapter(listAdapter);
+                    listAdapter.notifyDataSetChanged();
                     if(newsModel.isVideo()){
                         ((ListCentricViewHolder)holder).list_video_indicator.setVisibility(View.VISIBLE);
+//                        ((ListCentricViewHolder) holder).list_video_indicator.setVisibility(0);
                     }else{
                         ((ListCentricViewHolder)holder).list_video_indicator.setVisibility(View.INVISIBLE);
 
@@ -112,11 +137,11 @@ public class NewsAdapter extends RecyclerView.Adapter {
             TextView headtextTV;
             ImageView healineIV;
             RecyclerView headlineRV;
-            LinearLayout headline_video_indicator;
+            ImageButton headline_video_indicator;
         public HeadlineCentricViewHolder(@NonNull View itemView) {
             super(itemView);
                 headtextTV=itemView.findViewById(R.id.headtextTV);
-                headline_video_indicator=itemView.findViewById(R.id.headline_video_indicator);
+                headline_video_indicator=itemView.findViewById(R.id.headImgBtn);
                 headlineRV=itemView.findViewById(R.id.headlineRV);
                 healineIV=itemView.findViewById(R.id.healineIV);
         }
@@ -125,11 +150,11 @@ public class NewsAdapter extends RecyclerView.Adapter {
         TextView phototextTV;
         ImageView photoIV;
         RecyclerView photoRV;
-        LinearLayout photo_video_indicator;
+        ImageButton photo_video_indicator;
         public PhotoCentricViewHolder(@NonNull View itemView) {
             super(itemView);
             phototextTV=itemView.findViewById(R.id.phototextTV);
-            photo_video_indicator=itemView.findViewById(R.id.photo_video_indicator);
+            photo_video_indicator=itemView.findViewById(R.id.photoImgBtn);
             photoRV=itemView.findViewById(R.id.photoRV);
             photoIV=itemView.findViewById(R.id.photoIV);
 
@@ -139,14 +164,39 @@ public class NewsAdapter extends RecyclerView.Adapter {
         TextView listTV;
         ImageView listimg;
         RecyclerView listRV;
-        LinearLayout list_video_indicator;
+        ImageButton list_video_indicator;
         public ListCentricViewHolder(@NonNull View itemView) {
             super(itemView);
             listTV=itemView.findViewById(R.id.listTV);
             listimg=itemView.findViewById(R.id.listimg);
             listRV=itemView.findViewById(R.id.listRV);
-            list_video_indicator=itemView.findViewById(R.id.list_video_indicator);
+            list_video_indicator=itemView.findViewById(R.id.listImgBtn);
 
         }
+    }
+    public ArrayList<HeadlineModelData> getHeadline(){
+        headList=new ArrayList<>();
+        headList.add(new HeadlineModelData(true,"dfg"));
+        headList.add(new HeadlineModelData(false,"dfg"));
+        headList.add(new HeadlineModelData(true,"dfg"));
+
+        return headList;
+    }
+    public ArrayList<PhotoModelData> getPhoto(){
+        ArrayList<PhotoModelData> listData=new ArrayList<>();
+        listData.add(new PhotoModelData(R.drawable.cnbc_logo,false,"dfg"));
+        listData.add(new PhotoModelData(R.drawable.cnbc_logo,false,"dfg"));
+        listData.add(new PhotoModelData(R.drawable.cnbc_logo,true,"dfg"));
+        listData.add(new PhotoModelData(R.drawable.cnbc_logo,true,"dfg"));
+        return listData;
+    }
+    public ArrayList<ListModelData> getList(){
+
+        ArrayList<ListModelData> arrayList=new ArrayList<>();
+        arrayList.add(new ListModelData(R.drawable.cnbc_logo,"dfg"));
+        arrayList.add(new ListModelData(R.drawable.cnbc_logo,"dfg"));
+        arrayList.add(new ListModelData(R.drawable.cnbc_logo,"dfg"));
+        arrayList.add(new ListModelData(R.drawable.cnbc_logo,"dfg"));
+        return arrayList;
     }
 }
