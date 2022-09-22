@@ -1,4 +1,4 @@
-package com.example.news;
+package com.example.news.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.news.modeldata.PhotoModelData;
+import com.example.news.R;
 
 import java.util.List;
 
@@ -31,14 +34,15 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
         PhotoModelData modelData =photonewsList.get(position);
         if(modelData.isVideo()){
             holder.phototext.setText(modelData.getText());
-            holder.photoImg.setImageResource(modelData.getImgID());
+            holder.photo_video_indicator.setVisibility(View.VISIBLE);
+
 
         }else{
             holder.photo_video_indicator.setVisibility(View.INVISIBLE);
-            holder.phototext.setText(modelData.getText());
-            holder.photoImg.setImageResource(modelData.getImgID());
 
         }
+        holder.photoImg.setImageResource(modelData.getImgID());
+        holder.phototext.setText(modelData.getText());
 
     }
 

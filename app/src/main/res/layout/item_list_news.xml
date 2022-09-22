@@ -32,9 +32,8 @@
         <ImageView
             android:id="@+id/listimg"
             android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:scaleType="fitCenter"
-            android:padding="24dp"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/cnbc_logo" />
 
         <TextView

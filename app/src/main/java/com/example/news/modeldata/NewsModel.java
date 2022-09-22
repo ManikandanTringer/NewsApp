@@ -1,4 +1,4 @@
-package com.example.news;
+package com.example.news.modeldata;
 
 public class NewsModel {
     private String text;

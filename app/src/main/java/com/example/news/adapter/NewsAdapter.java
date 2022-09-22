@@ -1,4 +1,4 @@
-package com.example.news;
+package com.example.news.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,13 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.news.modeldata.HeadlineModelData;
+import com.example.news.modeldata.ListModelData;
+import com.example.news.modeldata.NewsModel;
+import com.example.news.modeldata.PhotoModelData;
+import com.example.news.R;
 
 import java.util.ArrayList;
 
@@ -107,6 +112,7 @@ public class NewsAdapter extends RecyclerView.Adapter {
                         ((ListCentricViewHolder)holder).list_video_indicator.setVisibility(View.INVISIBLE);
 
                     }
+
                     break;
             }
         }
@@ -176,27 +182,27 @@ public class NewsAdapter extends RecyclerView.Adapter {
     }
     public ArrayList<HeadlineModelData> getHeadline(){
         headList=new ArrayList<>();
-        headList.add(new HeadlineModelData(true,"dfg"));
-        headList.add(new HeadlineModelData(false,"dfg"));
-        headList.add(new HeadlineModelData(true,"dfg"));
+        headList.add(new HeadlineModelData(true,"This is the sample news with video.","Description"));
+        headList.add(new HeadlineModelData(false,"This is the sample news without video.","Description"));
+        headList.add(new HeadlineModelData(true,"This is the sample news with video.","Description"));
 
         return headList;
     }
     public ArrayList<PhotoModelData> getPhoto(){
         ArrayList<PhotoModelData> listData=new ArrayList<>();
-        listData.add(new PhotoModelData(R.drawable.cnbc_logo,false,"dfg"));
-        listData.add(new PhotoModelData(R.drawable.cnbc_logo,false,"dfg"));
-        listData.add(new PhotoModelData(R.drawable.cnbc_logo,true,"dfg"));
-        listData.add(new PhotoModelData(R.drawable.cnbc_logo,true,"dfg"));
+        listData.add(new PhotoModelData(R.drawable.news1,false,"This is the sample news without video."));
+        listData.add(new PhotoModelData(R.drawable.cnbc_logo,false,"This is the sample news without video."));
+        listData.add(new PhotoModelData(R.drawable.news2,true,"This is the sample news with video."));
+        listData.add(new PhotoModelData(R.drawable.news1,true,"This is the sample news with video."));
         return listData;
     }
     public ArrayList<ListModelData> getList(){
 
         ArrayList<ListModelData> arrayList=new ArrayList<>();
-        arrayList.add(new ListModelData(R.drawable.cnbc_logo,"dfg"));
-        arrayList.add(new ListModelData(R.drawable.cnbc_logo,"dfg"));
-        arrayList.add(new ListModelData(R.drawable.cnbc_logo,"dfg"));
-        arrayList.add(new ListModelData(R.drawable.cnbc_logo,"dfg"));
+        arrayList.add(new ListModelData(R.drawable.news2,"This is the sample news without video."));
+        arrayList.add(new ListModelData(R.drawable.news1,"This is the sample news without video."));
+        arrayList.add(new ListModelData(R.drawable.cnbc_logo,"This is the sample news without video."));
+        arrayList.add(new ListModelData(R.drawable.news2,"This is the sample news without video."));
         return arrayList;
     }
 }
